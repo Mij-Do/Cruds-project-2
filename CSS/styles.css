@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #dbdbdb;
+    font-family: system-ui;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+.container header {
+    margin: 20px 0;
+    background-color: #a8a8a8;
+    padding: 5px;
+    border-radius: 20px;
+    color: white;
+    text-transform: uppercase;
+}
+
