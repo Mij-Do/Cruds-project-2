@@ -17,7 +17,7 @@ body {
 /* Header styles */
 .container header {
     margin: 20px 0;
-    background-color: #a8a8a8;
+    background-color: #4e0909;
     padding: 5px;
     border-radius: 20px;
     color: white;
@@ -61,7 +61,7 @@ body {
 /* buttons styles */
 button {
     width: 100%;
-    padding: 5px;
+    padding: 10px;
     margin: 5px 0;
     background-color: #4e0909;
     color: #ffffff;
@@ -73,4 +73,9 @@ button {
 button:hover {
     background-color: #b12b2b;
     letter-spacing: 1px;
+}
+
+/* table */
+table {
+    width: 100%;
 }
