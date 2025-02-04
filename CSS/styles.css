@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+:root {
+    --main-border-radius: 5px;
+    --main-color: #4e0909;
+    --main-padding: 10px;
+}
+
 body {
     background-color: #dbdbdb;
     font-family: system-ui;
@@ -17,20 +23,20 @@ body {
 /* Header styles */
 .container header {
     margin: 20px 0;
-    background-color: #4e0909;
+    background-color: var(--main-color);
     padding: 5px;
-    border-radius: 20px;
+    border-radius: 10px;
     color: white;
     text-transform: uppercase;
 }
 /* Inputs styles */
 .container .cruds input {
     width: 100%;
-    padding: 10px;
+    padding: var(--main-padding);
     margin: 10px 0;
     outline: none;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--main-border-radius);
     transition: 1s;
 }
 .container .cruds input:focus {
@@ -49,10 +55,11 @@ body {
     width: 20%;
 }
 .container .cruds .price span {
-    background-color: #750d0d;
+    background-color: var(--main-color);
     color: white;
-    border-radius: 5px;
+    border-radius: var(--main-border-radius);
     text-align: start;
+    padding: var(--main-padding);
 }
 .container .cruds .price span::before {
     content: 'Total:';
@@ -61,20 +68,28 @@ body {
 /* buttons styles */
 button {
     width: 100%;
-    padding: 10px;
+    padding: var(--main-padding);
     margin: 5px 0;
-    background-color: #4e0909;
+    background-color: var(--main-color);
     color: #ffffff;
     outline: none;
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
     transition: 1s;
 }
 button:hover {
     background-color: #b12b2b;
     letter-spacing: 1px;
 }
-
+/* search buttons */
+.outputs .searchBtn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.outputs .searchBtn button{
+    width: 40%;
+}
 /* table */
 table {
     width: 100%;
