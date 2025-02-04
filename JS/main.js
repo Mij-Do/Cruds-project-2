@@ -23,14 +23,14 @@ function getTotal () {
 }
 
 // Creat product
-submit.onclick = function () {
-    let dataPro;
+let dataPro;
 
-    if (localStorage.product != null) {
-        dataPro = JSON.parse(localStorage.product);
-    } else {
-        dataPro = [];
-    };
+if (localStorage.product != null) {
+    dataPro = JSON.parse(localStorage.product);
+} else {
+    dataPro = [];
+};
+submit.addEventListener('click',  function () {
 
     let product = {
         title: title.value,
@@ -48,8 +48,10 @@ submit.onclick = function () {
 
     // clear data func
     clearData ();
-    getTotal ()
-}
+    getTotal ();
+    // Read data
+    readData ();
+});
 
 // clear data from inputs 
 function clearData () {
@@ -62,3 +64,24 @@ function clearData () {
     count.value = '';
     category.value = '';
 }
+// Read function
+function readData () {
+    let table = '';
+    for (let i = 0; i < dataPro.length; i++) {
+        table += `
+            <tr>
+                <th>${i + 1}</th>
+                <th>${dataPro[i].title}</th>
+                <th>${dataPro[i].price}</th>
+                <th>${dataPro[i].taxes}</th>
+                <th>${dataPro[i].ads}</th>
+                <th>${dataPro[i].discount}</th>
+                <th>${dataPro[i].total}</th>
+                <th><button id="update">Update</button></th>
+                <th><button id="delete">Delete</button></th>
+            </tr>
+        `;
+    };
+    document.getElementById('tbody').innerHTML = table;
+}
+readData ();
