@@ -45,4 +45,20 @@ submit.onclick = function () {
     
     dataPro.push(product);
     localStorage.setItem('product', JSON.stringify(dataPro)); 
+
+    // clear data func
+    clearData ();
+    getTotal ()
+}
+
+// clear data from inputs 
+function clearData () {
+    title.value = '';
+    price.value = '';
+    taxes.value = '';
+    ads.value = '';
+    discount.value = '';
+    total.innerHTML = '';
+    count.value = '';
+    category.value = '';
 }
