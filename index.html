@@ -29,10 +29,10 @@
                     <button id="submit">Create</button>
                 </div>
                 <div class="outputs">
-                    <input type="text" id="search" placeholder="search">
+                    <input onkeyup="searchData (this.value)" type="text" id="search" placeholder="search">
                     <div class="searchBtn">
-                        <button id="searchTitle">search by title</button>
-                        <button id="searchCategory">search by category</button>
+                        <button onclick="searchFunc (this.id)" id="searchTitle">search by title</button>
+                        <button onclick="searchFunc (this.id)" id="searchCategory">search by category</button>
                     </div>
                     <!-- delete button -->
                     <div id="deleteDiv">
@@ -47,6 +47,7 @@
                             <th>Ads</th>
                             <th>discount</th>
                             <th>Total</th>
+                            <th>Category</th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>

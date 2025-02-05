@@ -85,6 +85,9 @@ button:hover {
     margin: 10px 0;
     width: 100%;
 }
+#search {
+    display: none;
+}
 /* search buttons */
 .outputs .searchBtn {
     display: flex;

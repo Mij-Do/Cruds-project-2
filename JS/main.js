@@ -9,8 +9,8 @@ let total = document.getElementById('total');
 let count = document.getElementById('count');
 let category = document.getElementById('category');
 let submit = document.getElementById('submit');
-let mood = 'create';
-let tmp;
+let mood = 'create'; 
+let tmp; // glopal variable
 // get total
 function getTotal () {
     if (price.value != '') {
@@ -34,34 +34,39 @@ if (localStorage.product != null) {
 submit.addEventListener('click',  function () {
 
     let product = {
-        title: title.value,
+        title: title.value.toLowerCase(),
         price: price.value,
         taxes: taxes.value,
         ads: ads.value,
         discount: discount.value,
         total: total.innerHTML,
         count: count.value,
-        category: category.value,
+        category: category.value.toLowerCase(),
     };
 
-    // count function
-    if (mood === 'create') {
-        if (product.count > 1) {
-            for (let i = 0; i < product.count; i++) {
+    if (title.value != '' && price.value != '' && category.value != '') {
+        if (mood === 'create') {
+            // count function
+            if (product.count > 1) {
+                for (let i = 0; i < product.count; i++) {
+                    dataPro.push(product);
+                }
+            } else {
                 dataPro.push(product);
-            }
+            };
         } else {
-            dataPro.push(product);
-        };
+            dataPro[tmp] = product;
+            mood = 'create';
+            count.style.display = 'block';
+            submit.innerHTML = 'Create';
+        }
+    
     } else {
-        dataPro[tmp] = product;
-        mood = 'create';
-        count.style.display = 'block';
-        submit.innerHTML = 'Create';
+        clearData ();
     }
-
     localStorage.setItem('product', JSON.stringify(dataPro)); 
-
+    
+    
     // clear data func
     clearData ();
     getTotal ();
@@ -93,6 +98,7 @@ function readData () {
                 <th>${dataPro[i].ads}</th>
                 <th>${dataPro[i].discount}</th>
                 <th>${dataPro[i].total}</th>
+                <th>${dataPro[i].category}</th>
                 <th><button onclick="updateData (${i})" id="update">Update</button></th>
                 <th><button onclick="deleteItem (${i})" id="delete">Delete</button></th>
             </tr>
@@ -143,3 +149,59 @@ function updateData (i) {
         behavior: 'smooth',
     });
 };
+
+// search 
+let search = document.getElementById('search');
+function searchFunc (id) {
+    let searchMood = 'title';
+    if (id === 'searchTitle') {
+        searchMood = 'title';
+        search.placeholder = 'Search By Title';
+    } else {
+        searchMood = 'category';
+        search.placeholder = 'Search By Category';
+    }
+    search.style.display = 'block';
+    search.focus();
+    readData();
+    search.value = '';
+};
+
+function searchData (value) {
+    let table = '';
+    for (let i = 0; i < dataPro.length; i++) {
+        if (dataPro[i].title.includes(value.toLowerCase())) {
+            table += `
+                <tr>
+                    <th>${i + 1}</th>
+                    <th>${dataPro[i].title}</th>
+                    <th>${dataPro[i].price}</th>
+                    <th>${dataPro[i].taxes}</th>
+                    <th>${dataPro[i].ads}</th>
+                    <th>${dataPro[i].discount}</th>
+                    <th>${dataPro[i].total}</th>
+                    <th>${dataPro[i].category}</th>
+                    <th><button onclick="updateData (${i})" id="update">Update</button></th>
+                    <th><button onclick="deleteItem (${i})" id="delete">Delete</button></th>
+                </tr>
+            `;
+        } else if (dataPro[i].category.includes(value.toLowerCase())) {
+            table += `
+                <tr>
+                    <th>${i + 1}</th>
+                    <th>${dataPro[i].title}</th>
+                    <th>${dataPro[i].price}</th>
+                    <th>${dataPro[i].taxes}</th>
+                    <th>${dataPro[i].ads}</th>
+                    <th>${dataPro[i].discount}</th>
+                    <th>${dataPro[i].total}</th>
+                    <th>${dataPro[i].category}</th>
+                    <th><button onclick="updateData (${i})" id="update">Update</button></th>
+                    <th><button onclick="deleteItem (${i})" id="delete">Delete</button></th>
+                </tr>
+            `;
+        };
+        document.getElementById('tbody').innerHTML = table;
+    };
+};
+
