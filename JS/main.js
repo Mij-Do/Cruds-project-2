@@ -86,12 +86,33 @@ function readData () {
                 <th>${dataPro[i].discount}</th>
                 <th>${dataPro[i].total}</th>
                 <th><button id="update">Update</button></th>
-                <th><button id="delete">Delete</button></th>
+                <th><button onclick="deleteItem (${i})" id="delete">Delete</button></th>
             </tr>
         `;
     };
     document.getElementById('tbody').innerHTML = table;
+
+    // delete condition
+    let deleteDiv = document.getElementById('deleteDiv');
+    if (dataPro.length > 0) {
+        deleteDiv.innerHTML = `<button onclick="deleteAll ()">Delete All(${dataPro.length})</button>`;
+    } else {
+        deleteDiv.innerHTML = '';
+    }
 }
 readData ();
 
+// delete function
+// delete all
+function deleteAll () {
+    dataPro.splice(0);
+    localStorage.clear();
+    readData ();
+}
 
+// delete 1 item
+function deleteItem (i) {
+    dataPro.splice(i, 1); 
+    localStorage.product = JSON.stringify(dataPro); // update data on local storage after delete items
+    readData (); 
+}
