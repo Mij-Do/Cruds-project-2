@@ -42,8 +42,16 @@ submit.addEventListener('click',  function () {
         count: count.value,
         category: category.value,
     };
-    
-    dataPro.push(product);
+
+    // count function
+    if (product.count > 1) {
+        for (let i = 0; i < product.count; i++) {
+            dataPro.push(product);
+        }
+    } else {
+        dataPro.push(product);
+    };
+
     localStorage.setItem('product', JSON.stringify(dataPro)); 
 
     // clear data func
@@ -85,3 +93,5 @@ function readData () {
     document.getElementById('tbody').innerHTML = table;
 }
 readData ();
+
+
