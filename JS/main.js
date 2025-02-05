@@ -9,7 +9,8 @@ let total = document.getElementById('total');
 let count = document.getElementById('count');
 let category = document.getElementById('category');
 let submit = document.getElementById('submit');
-
+let mood = 'create';
+let tmp;
 // get total
 function getTotal () {
     if (price.value != '') {
@@ -44,13 +45,20 @@ submit.addEventListener('click',  function () {
     };
 
     // count function
-    if (product.count > 1) {
-        for (let i = 0; i < product.count; i++) {
+    if (mood === 'create') {
+        if (product.count > 1) {
+            for (let i = 0; i < product.count; i++) {
+                dataPro.push(product);
+            }
+        } else {
             dataPro.push(product);
-        }
+        };
     } else {
-        dataPro.push(product);
-    };
+        dataPro[tmp] = product;
+        mood = 'create';
+        count.style.display = 'block';
+        submit.innerHTML = 'Create';
+    }
 
     localStorage.setItem('product', JSON.stringify(dataPro)); 
 
@@ -85,7 +93,7 @@ function readData () {
                 <th>${dataPro[i].ads}</th>
                 <th>${dataPro[i].discount}</th>
                 <th>${dataPro[i].total}</th>
-                <th><button id="update">Update</button></th>
+                <th><button onclick="updateData (${i})" id="update">Update</button></th>
                 <th><button onclick="deleteItem (${i})" id="delete">Delete</button></th>
             </tr>
         `;
@@ -108,11 +116,30 @@ function deleteAll () {
     dataPro.splice(0);
     localStorage.clear();
     readData ();
-}
+};
 
 // delete 1 item
 function deleteItem (i) {
     dataPro.splice(i, 1); 
     localStorage.product = JSON.stringify(dataPro); // update data on local storage after delete items
     readData (); 
-}
+};
+
+// update 
+function updateData (i) {
+    title.value = dataPro[i].title;
+    price.value = dataPro[i].price;
+    taxes.value = dataPro[i].taxes;
+    ads.value = dataPro[i].ads;
+    discount.value = dataPro[i].discount;
+    getTotal();
+    count.style.display = 'none';
+    category.value = dataPro[i].category;
+    mood = 'update'
+    submit.innerHTML = 'Update';
+    tmp = i;
+    scroll({
+        top: 0,
+        behavior: 'smooth',
+    });
+};
